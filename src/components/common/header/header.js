@@ -18,7 +18,7 @@ export default function Header() {
             <header className="z-10 w-full text-sm p-8">
                 <div className="container">
                     <div className="w-full items-center justify-between lg:flex">
-                        <a href='https://github.com/giannisrig/next-core-template' target='_blank' className="flex items-center gap-10px fixed left-0 top-0 flex w-full justify-center border-b border-amethyst bg-mirage text-pink pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto  lg:rounded-xl lg:border lg:p-4 ">
+                        <a href='https://github.com/giannisrig/nextjs-weather' target='_blank' className="flex items-center gap-10px fixed left-0 top-0 flex w-full justify-center border-b border-amethyst bg-mirage text-pink pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto  lg:rounded-xl lg:border lg:p-4 ">
                             <Image
                                 src="/github.svg"
                                 alt="Gihub Logo"
