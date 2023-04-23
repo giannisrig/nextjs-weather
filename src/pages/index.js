@@ -1,24 +1,26 @@
-import Image from 'next/image'
+import Head from 'next/head';
 import Layout from "@/components/layout/layout";
 
 export default function Home() {
     return (
         <Layout>
-            <div className="container">
-                <div className='flex flex-col items-center justify-center gap-30px p-24 w-full'>
-                    <div className="next-logo relative flex place-items-center items-center justify-center w-[300px] h-[300px] after:absolute after:-z-20 after:h-[240px] after:w-[240px] after:translate-x-2/4 after:right-1/2 after:blur-2xl after:content-['']">
-                        <Image
-                            className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
-                            src="/next.svg"
-                            alt="Next.js Logo"
-                            width={180}
-                            height={37}
-                            priority
-                        />
-                    </div>
-                    <p className="flex w-full justify-center border-b border-amethyst bg-mirage text-green pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto  lg:rounded-xl lg:border lg:p-4 ">
-                        <code className="font-mono font-bold">npx create-next-app --e https://github.com/giannisrig/next-core-template YOUR_APP_NAME</code>
-                    </p>
+            <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-400 to-purple-500">
+                <Head>
+                    <title>NextJS: Weather App | Demo Project by Giannis Riganas</title>
+                    <meta name="description" content="A weather app built with Next.js" />
+                </Head>
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search location..."
+                        className="px-4 py-2 rounded-l-lg outline-none bg-white focus:bg-gray-100 border-t-2 border-b-2 border-l-2 border-gray-300 focus:border-blue-400 focus:ring-0 transition-colors duration-300"
+                    />
+                    <button
+                        type="button"
+                        className="px-4 py-2 rounded-r-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300"
+                    >
+                        Search
+                    </button>
                 </div>
             </div>
         </Layout>
