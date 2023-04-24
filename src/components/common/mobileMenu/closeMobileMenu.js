@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useDispatch } from 'react-redux';
 import { setMobileMenuOpen } from "@/slices/mobileMenuSlice";
+import { setOverlayActive } from '@/slices/overlaySlice';
 
 export default function CloseMobileMenu() {
 
@@ -8,7 +9,8 @@ export default function CloseMobileMenu() {
 
     const closeMobileMenu = (event) => {
         event.preventDefault();
-        dispatch( setMobileMenuOpen(false) );
+        dispatch( setMobileMenuOpen( false ) );
+        dispatch( setOverlayActive( false ) );
     }
 
     return (

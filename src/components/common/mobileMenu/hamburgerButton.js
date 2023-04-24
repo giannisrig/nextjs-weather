@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useDispatch } from 'react-redux';
 import { setMobileMenuOpen } from "@/slices/mobileMenuSlice";
+import { setOverlayActive } from "@/slices/overlaySlice";
 
 export default function HamburgerButton() {
 
@@ -9,6 +10,7 @@ export default function HamburgerButton() {
     function openMobileMenu( e ) {
         e.preventDefault();
         dispatch( setMobileMenuOpen( true ) );
+        dispatch( setOverlayActive( true ) );
     }
 
     return (

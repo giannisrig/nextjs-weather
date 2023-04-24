@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from "react";
 import { useRouter } from 'next/router'
 import { selectMobileMenuOpen, setMobileMenuOpen } from '@/slices/mobileMenuSlice';
+import { selectOverlayActive } from '@/slices/overlaySlice';
 import MobileNavigation from '@/components/common/mobileMenu/mobileNavigation';
 import CloseMobileMenu from '@/components/common/mobileMenu/closeMobileMenu';
 
@@ -11,6 +12,7 @@ export default function MobileMenu() {
     const router            = useRouter();
     const dispatch          = useDispatch();
     const mobileMenuOpen    = useSelector(selectMobileMenuOpen); // updated
+    const overlayActive     = useSelector(selectOverlayActive); // updated
     const header            = useRef(null);
 
     useEffect(() => {
@@ -18,6 +20,12 @@ export default function MobileMenu() {
         header.current.style.transform = mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)';
 
     }, [mobileMenuOpen])
+
+    useEffect(() => {
+
+        header.current.style.transform = overlayActive ? 'translateX(0)' : 'translateX(100%)';
+
+    }, [overlayActive])
 
     useEffect(() => {
 
@@ -29,7 +37,7 @@ export default function MobileMenu() {
 
 
     return (
-        <header className={`h-screen fixed top-0 right-0 w-[300px] bg-mirage transition-all duration-200`} ref={header}>
+        <header className={`h-screen fixed top-0 right-0 w-[300px] bg-mirage transition-all duration-200 z-30`} ref={header}>
 
             <div className="flex flex-col w-full h-full">
 
