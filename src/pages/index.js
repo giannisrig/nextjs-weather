@@ -2,13 +2,16 @@ import Head from 'next/head';
 import Layout from "@/components/layout/layout";
 import { useState } from 'react';
 import validateLocation from '@/libs/utils/validateLocation';
-import fetchCoordinates from '@/libs/utils/fetchCoordinates';
+import fetchLocationData from '@/libs/utils/fetchLocationData';
+import formatWeatherDataMinimal from '@/libs/utils/formatWeatherDataMinimal';
 import axios from 'axios';
+import WeatherCard from '@/components/WeatherCard';
 
 export default function Home() {
 
     // Define state variables for the location and weather data
     const [location, setLocation]         = useState('');
+    const [locationData, setLocationData] = useState(null);
     const [weatherData, setWeatherData]   = useState(null);
     const [isLoading, setIsLoading]       = useState(false); // Add state for loading indicator
     const [errorMessage, setErrorMessage] = useState(null); // Add state for error message
@@ -39,25 +42,31 @@ export default function Home() {
 
             }
 
-            // Reverse geocode to fetch the coordinates of the location
-            const {lat,lng} = await fetchCoordinates(location);
-            console.log({lat,lng})
+            // Reverse geocode to fetch location data from Google Maps including the coordinates
+            const geocodedLocationData = await fetchLocationData(location);
+
+            // Set the location data state to the geocoded data fetched
+            setLocationData(geocodedLocationData);
 
             // Make a call to the project client API to get the weather data
-            await axios.get(`/api/weather?latitude=${lat}&longitude=${lng}`)
+            await axios.get(`/api/weather?latitude=${geocodedLocationData.lat}&longitude=${geocodedLocationData.lng}`)
                 .then( response => {
 
+                    // Format the Weather data with the minimal required data only
+                    const data = formatWeatherDataMinimal(response.data);
+
                     // Set the weather data state to the data fetched
-                    setWeatherData(response.data);
-                    console.log('Location Data', response.data);
+                    setWeatherData(data);
+                    console.log('Weather Data', response.data);
 
                     // Set location state to empty string
-                    setLocation("");
+                    // setLocation("");
 
                 })
                 .catch(error => {
 
-                    console.log(error);
+                    // console.log(error);
+
                     // handle error response
                     if (error.response) {
                         // The request was made and the server responded with a status code that falls out of the range of 2xx
@@ -88,36 +97,39 @@ export default function Home() {
 
     return (
         <Layout>
-            <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-400 to-purple-500">
-                <Head>
-                    <title>NextJS: Weather App | Demo Project by Giannis Riganas</title>
-                    <meta name="description" content="A weather app built with Next.js" />
-                </Head>
-                <form className="mb-4" onSubmit={(e) => handleSubmit(e)}>
-                    <input
-                        type="text"
-                        placeholder="Search location..."
-                        className="px-4 py-2 rounded-l-lg outline-none bg-white text-black focus:bg-gray-100 border-t-2 border-b-2 border-l-2 border-gray-300 focus:border-blue-400 focus:ring-0 transition-colors duration-300"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                    />
-                    <button
-                        type="submit"
-                        className="px-4 py-2 rounded-r-lg bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300"
-                    >
-                        Search
-                    </button>
-                </form>
+            <Head>
+                <title>NextJS: Weather App | Demo Project by Giannis Riganas</title>
+                <meta name="description" content="A weather app built with Next.js" />
+            </Head>
+            <div className="container">
+                <div className="flex flex-col items-center justify-center gap-30px py-100px w-full">
+                    <h1 className="text-2xl text-center">Search for a location to get Weather Data</h1>
+                    <form className="mb-4 flex w-[600px] max-w-full" onSubmit={(e) => handleSubmit(e)}>
+                        <input
+                            type="text"
+                            placeholder="Enter a location to search for weather..."
+                            className="px-4 py-2 rounded-l-lg grow outline-none bg-white text-black focus:bg-gray-100 border-t-2 border-b-2 border-l-2 border-gray-300 focus:border-blue-400 focus:ring-0 transition-colors duration-300"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                        />
+                        <button
+                            type="submit"
+                            className="px-4 py-2 rounded-r-lg bg-green text-white hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300"
+                        >
+                            Search
+                        </button>
+                    </form>
 
-                {isLoading && (
-                    <p className="text-xl text-white font-bold">Loading...</p>
-                )}
-                {errorMessage && (
-                    <p className="text-red-500 text-xl font-bold">{errorMessage}</p>
-                )}
-                {weatherData && (
-                    <p className="text-xl text-white font-bold">Weather Data here</p>
-                )}
+                    {isLoading && (
+                        <p className="text-xl text-white font-bold">Loading...</p>
+                    )}
+                    {errorMessage && (
+                        <p className="text-red-500 text-xl font-bold">{errorMessage}</p>
+                    )}
+                    {weatherData && (
+                        <WeatherCard weatherData={weatherData} locationData={locationData} />
+                    )}
+                </div>
             </div>
         </Layout>
     )

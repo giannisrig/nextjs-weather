@@ -56,7 +56,7 @@ const WeatherCard = ({ weatherData, locationData }) => {
 
                 </div>
 
-                <a href="#" className="text-sm text-green">
+                <a href="#" className="text-sm text-green transition-colors duration-200 hover:text-pink">
                     View full forecast
                 </a>
             </div>
