@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux'; // updated
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from "react";
 import { useRouter } from 'next/router'
-import { selectMobileMenuOpen, setMobileMenuOpen } from '@/slices/mobileMenuSlice'; //updated
-import Image from "next/image";
-import Link from 'next/link'
+import { selectMobileMenuOpen, setMobileMenuOpen } from '@/slices/mobileMenuSlice';
+import MobileNavigation from '@/components/common/mobileMenu/mobileNavigation';
+import CloseMobileMenu from '@/components/common/mobileMenu/closeMobileMenu';
 
 
 export default function MobileMenu() {
@@ -27,16 +27,25 @@ export default function MobileMenu() {
 
     }, [dispatch, router.events])
 
-    function closeMobileMenu(e) {
-        e.preventDefault();
-        dispatch( setMobileMenuOpen(false) );
-    }
 
     return (
-        <header className={`h-full w-[300px] bg-white`} ref={header}>
+        <header className={`h-screen fixed top-0 right-0 w-[300px] bg-mirage transition-all duration-200`} ref={header}>
 
+            <div className="flex flex-col w-full h-full">
 
+                <div className="flex justify-between px-30px py-10px items-center border-b-2 border-bleached pb-5px">
 
+                    <div className="py-10px xl:py-20px">
+                        Logo Here
+                    </div>
+
+                    <CloseMobileMenu />
+
+                </div>
+
+                <MobileNavigation />
+
+            </div>
 
         </header>
     );
