@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import Layout from "@/components/layout/layout";
 import { useState } from 'react';
+import validateLocation from '@/libs/utils/validateLocation';
+import fetchCoordinates from '@/libs/utils/fetchCoordinates';
+import axios from 'axios';
 
 export default function Home() {
 
@@ -13,24 +16,72 @@ export default function Home() {
     // Define an event handler for the form submission
     const handleSubmit = async (event) => {
 
-        event.preventDefault(); // Prevent the default form submission
+        // Prevent the default form submission
+        event.preventDefault();
 
-        setIsLoading(true); // Set loading state to true when form is submitted
-        setErrorMessage(null); // Set error message to null when form is submitted
+        // Set loading state to true when form is submitted
+        setIsLoading(true);
+
+        // Set error message to null when form is submitted
+        setErrorMessage(null);
 
         // Send a request to the api to fetch the weather data for the given location
         try {
-            console.log('Will fetch the weather data here for location:', location )
 
-            // setWeatherData(data); // Set the weather data state to the data fetched
-            setLocation("");  // Set location state to empty string
+            // Validate the location entered by the user
+            const isValid = validateLocation(location);
+
+            if (!isValid){
+
+                // Set the error message state when the location is invalid
+                setErrorMessage('Invalid location entered.');
+                return;
+
+            }
+
+            // Reverse geocode to fetch the coordinates of the location
+            const {lat,lng} = await fetchCoordinates(location);
+            console.log({lat,lng})
+
+            // Make a call to the project client API to get the weather data
+            await axios.get(`/api/weather?latitude=${lat}&longitude=${lng}`)
+                .then( response => {
+
+                    // Set the weather data state to the data fetched
+                    setWeatherData(response.data);
+                    console.log('Location Data', response.data);
+
+                    // Set location state to empty string
+                    setLocation("");
+
+                })
+                .catch(error => {
+
+                    console.log(error);
+                    // handle error response
+                    if (error.response) {
+                        // The request was made and the server responded with a status code that falls out of the range of 2xx
+                        setErrorMessage( error.response.status + ': ' + error.response.data );
+                    }
+                    else if (error.request) {
+                        // The request was made but no response was received
+                        setErrorMessage( 'The request was made but no response was received' );
+                    }
+                    else {
+                        // Something happened in setting up the request that triggered an Error
+                        setErrorMessage( 'An unexpected error occurred while trying to make your request.' );
+                    }
+
+                });
 
         }
         catch (error) {
-            setErrorMessage("Unable to fetch weather data. Please try again."); // Set the error message state when an error occurs
+            // Set the error message state when an error occurs
+            setErrorMessage('Unable to fetch weather data. Please try again.');
         }
         finally {
-            setIsLoading(false); // Set loading state to false when the request is finished
+            // Set loading state to false when the request is finished
+            setIsLoading(false);
         }
 
     };
