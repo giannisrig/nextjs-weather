@@ -44,6 +44,7 @@ module.exports = {
         'pink': '#F73693',
         'amethyst': '#AE94BD',
         'mirage': '#1D1528',
+        'bleached': '#302440',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
