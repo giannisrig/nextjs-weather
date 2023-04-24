@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useRef } from "react";
+import {useEffect, useState} from 'react';
 import { useRouter } from 'next/router'
 import { selectMobileMenuOpen, setMobileMenuOpen } from '@/slices/mobileMenuSlice';
 import { selectOverlayActive } from '@/slices/overlaySlice';
@@ -13,17 +13,28 @@ export default function MobileMenu() {
     const dispatch          = useDispatch();
     const mobileMenuOpen    = useSelector(selectMobileMenuOpen); // updated
     const overlayActive     = useSelector(selectOverlayActive); // updated
-    const header            = useRef(null);
+    const [mobileMenuClass, setMobileMenuClass] = useState('translate-x-full');
+
+    const mobileMenuClassHandler = ( stateSelector ) => {
+
+        if( stateSelector ){
+            setMobileMenuClass('translate-x-0');
+        }
+        else {
+            setMobileMenuClass('translate-x-full');
+        }
+
+    }
 
     useEffect(() => {
 
-        header.current.style.transform = mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)';
+        mobileMenuClassHandler(mobileMenuOpen)
 
     }, [mobileMenuOpen])
 
     useEffect(() => {
 
-        header.current.style.transform = overlayActive ? 'translateX(0)' : 'translateX(100%)';
+        mobileMenuClassHandler(overlayActive)
 
     }, [overlayActive])
 
@@ -37,7 +48,7 @@ export default function MobileMenu() {
 
 
     return (
-        <header className={`h-screen fixed top-0 right-0 w-[300px] bg-mirage transition-all duration-200 z-30`} ref={header}>
+        <header className={`h-screen fixed top-0 right-0 w-[300px] bg-mirage transition-all duration-200 z-30 ` + mobileMenuClass}>
 
             <div className="flex flex-col w-full h-full">
 
