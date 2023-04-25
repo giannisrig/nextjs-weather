@@ -4,7 +4,6 @@ import Overlay from '@/components/common/overlay/Overlay';
 
 export default function Footer() {
 
-
     return (
         <>
             <Overlay />
