@@ -1,11 +1,12 @@
 import WeatherIcon from '@/components/WeatherIcon';
 import CountryIcon from '@/components/CountryIcon';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const WeatherCard = ({ weatherData, locationData }) => {
 
     const { iconName, temp, tempFeel, humidity, weather, uvi } = weatherData;
-    const { country, locationName } = locationData;
+    const { country, locationName, location } = locationData;
 
     return (
         <div className="flex flex-col gap-30px rounded-lg shadow-md bg-mirage w-fit md:w-[550px] max-w-full mx-auto">
@@ -56,9 +57,9 @@ const WeatherCard = ({ weatherData, locationData }) => {
 
                 </div>
 
-                <a href="#" className="text-sm text-green transition-colors duration-200 hover:text-pink">
+                <Link href={`/weather/${location}`} className="text-sm text-green transition-colors duration-200 hover:text-pink">
                     View full forecast
-                </a>
+                </Link>
             </div>
 
         </div>

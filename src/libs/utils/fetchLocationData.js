@@ -13,7 +13,7 @@ const fetchLocationData = async ( location ) => {
     const locationName      = response.data.results[0].formatted_address; // Get the formatted location name/address by Google Maps
     const { lat, lng }      = response.data.results[0].geometry.location; // Get the coordinates from the first location result
 
-    return { lat, lng, country, locationName };
+    return { lat, lng, country, locationName, location };
 
 };
 

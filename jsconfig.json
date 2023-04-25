@@ -8,7 +8,8 @@
       "@/libs/*": ["./src/libs/*"],
       "@/slices/*": ["./src/libs/store/slices/*"],
       "@/pages/*": ["./src/pages/*"],
-      "@/styles/*": ["./src/styles/*"]
+      "@/styles/*": ["./src/styles/*"],
+      "@/types/*": ["./src/types/*"]
     }
   }
 }
