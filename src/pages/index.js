@@ -7,6 +7,7 @@ import formatWeatherDataMinimal from '@/libs/utils/formatWeatherDataMinimal';
 import Layout from "@/components/layout/Layout";
 import WeatherCard from '@/components/WeatherCard';
 import PageSectionContainer from '@/components/common/section/PageSectionContainer';
+import PopularLocations from '@/components/PopularLocations';
 
 export default function Home() {
 
@@ -130,7 +131,11 @@ export default function Home() {
                     {weatherData && (
                         <WeatherCard weatherData={weatherData} locationData={locationData} />
                     )}
+
                 </div>
+            </PageSectionContainer>
+            <PageSectionContainer>
+                <PopularLocations />
             </PageSectionContainer>
         </Layout>
     )
