@@ -1,18 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import { selectMobileMenuOpen, setMobileMenuOpen } from '@/slices/mobileMenuSlice';
 import { selectOverlayActive } from '@/slices/overlaySlice';
-import MobileNavigation from '@/components/common/mobileMenu/mobileNavigation';
-import CloseMobileMenu from '@/components/common/mobileMenu/closeMobileMenu';
-
+import MobileNavigation from '@/components/common/mobileMenu/MobileNavigation';
+import CloseMobileMenu from '@/components/common/mobileMenu/CloseMobileMenu';
 
 export default function MobileMenu() {
 
     const router            = useRouter();
     const dispatch          = useDispatch();
-    const mobileMenuOpen    = useSelector(selectMobileMenuOpen); // updated
-    const overlayActive     = useSelector(selectOverlayActive); // updated
+    const mobileMenuOpen    = useSelector( selectMobileMenuOpen ); // updated
+    const overlayActive     = useSelector( selectOverlayActive ); // updated
     const [mobileMenuClass, setMobileMenuClass] = useState('translate-x-full');
 
     const mobileMenuClassHandler = ( stateSelector ) => {
@@ -28,13 +27,13 @@ export default function MobileMenu() {
 
     useEffect(() => {
 
-        mobileMenuClassHandler(mobileMenuOpen)
+        mobileMenuClassHandler( mobileMenuOpen )
 
     }, [mobileMenuOpen])
 
     useEffect(() => {
 
-        mobileMenuClassHandler(overlayActive)
+        mobileMenuClassHandler( overlayActive )
 
     }, [overlayActive])
 

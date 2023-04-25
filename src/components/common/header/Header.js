@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import MobileMenu from "@/components/common/mobileMenu/mobileMenu";
-import HamburgerButton from '@/components/common/mobileMenu/hamburgerButton';
+import MobileMenu from "@/components/common/mobileMenu/MobileMenu";
+import HamburgerButton from '@/components/common/mobileMenu/HamburgerButton';
 
 export default function Header() {
 

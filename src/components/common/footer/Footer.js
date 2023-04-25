@@ -1,6 +1,6 @@
-import MainFooter from '@/components/common/footer/mainFooter';
-import SubFooter from '@/components/common/footer/subFooter';
-import Overlay from '@/components/common/overlay';
+import MainFooter from '@/components/common/footer/MainFooter';
+import SubFooter from '@/components/common/footer/SubFooter';
+import Overlay from '@/components/common/overlay/Overlay';
 
 export default function Footer() {
 
