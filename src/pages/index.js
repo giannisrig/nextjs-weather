@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import Layout from "@/components/layout/layout";
 import { useState } from 'react';
+import axios from 'axios';
 import validateLocation from '@/libs/utils/validateLocation';
 import fetchLocationData from '@/libs/utils/fetchLocationData';
 import formatWeatherDataMinimal from '@/libs/utils/formatWeatherDataMinimal';
-import axios from 'axios';
+import Layout from "@/components/layout/Layout";
 import WeatherCard from '@/components/WeatherCard';
+import PageSectionContainer from '@/components/common/section/PageSectionContainer';
 
 export default function Home() {
 
@@ -101,8 +102,8 @@ export default function Home() {
                 <title>NextJS: Weather App | Demo Project by Giannis Riganas</title>
                 <meta name="description" content="A weather app built with Next.js" />
             </Head>
-            <div className="container">
-                <div className="flex flex-col items-center justify-center gap-30px py-100px w-full">
+            <PageSectionContainer>
+                <div className="flex flex-col items-center justify-center gap-30px w-full">
                     <h1 className="text-2xl text-center">Search for a location to get Weather Data</h1>
                     <form className="mb-4 flex w-[600px] max-w-full" onSubmit={(e) => handleSubmit(e)}>
                         <input
@@ -130,7 +131,7 @@ export default function Home() {
                         <WeatherCard weatherData={weatherData} locationData={locationData} />
                     )}
                 </div>
-            </div>
+            </PageSectionContainer>
         </Layout>
     )
 }

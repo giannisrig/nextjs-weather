@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import Layout from "@/components/Layout/layout";
-import WeatherCard from "@/components/WeatherCard";
 import getWeatherLocation from '@/libs/api/getWeatherLocation';
+import Layout from "@/components/Layout/Layout";
+import WeatherCard from "@/components/WeatherCard";
+import PageSectionContainer from '@/components/common/section/PageSectionContainer';
 
 export default function Location({ weatherData, locationData }) {
 
@@ -32,15 +33,17 @@ export default function Location({ weatherData, locationData }) {
 
     return (
         <Layout>
-            <h1 className="text-3xl font-bold mb-4">{location}</h1>
-            {pageWeatherData && pageLocationData ? (
-                <WeatherCard
-                    weatherData={pageWeatherData}
-                    locationData={pageLocationData}
-                />
-            ) : (
-                <p>Loading...</p>
-            )}
+            <PageSectionContainer>
+                <h1 className="text-3xl font-bold mb-4">{location}</h1>
+                {pageWeatherData && pageLocationData ? (
+                    <WeatherCard
+                        weatherData={pageWeatherData}
+                        locationData={pageLocationData}
+                    />
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </PageSectionContainer>
         </Layout>
     );
 }
