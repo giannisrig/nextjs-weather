@@ -7,5 +7,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Node JS" level="application" />
+    <orderEntry type="library" name="@types/promise-polyfill" level="application" />
   </component>
 </module>
