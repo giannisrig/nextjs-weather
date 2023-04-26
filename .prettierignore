@@ -1,6 +1,9 @@
 # Ignore all dotfiles
 .*
 
+# Ignore Readme
+README.md
+
 # Ignore build directories
 public/
 
