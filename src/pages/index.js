@@ -134,9 +134,9 @@ export default function Home() {
 
                 </div>
             </PageSectionContainer>
-            <PageSectionContainer>
-                <PopularLocations />
-            </PageSectionContainer>
+            {/*<PageSectionContainer>*/}
+            {/*    <PopularLocations />*/}
+            {/*</PageSectionContainer>*/}
         </Layout>
     )
 }
