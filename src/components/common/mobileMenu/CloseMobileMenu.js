@@ -19,7 +19,7 @@ export default function CloseMobileMenu() {
         href="#"
         onClick={(e) => closeMobileMenu(e)}
       >
-        <div className="p-2 bg-bleached rounded-full flex items-center justify-center">
+        <div className="flex items-center justify-center rounded-full bg-bleached p-2">
           <Image
             src="/images/close.svg"
             alt="Close menu icon"

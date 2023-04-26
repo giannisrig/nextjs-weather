@@ -96,8 +96,8 @@ export default function Home() {
         <meta name="description" content="A weather app built with Next.js" />
       </Head>
       <PageSectionContainer>
-        <div className="flex flex-col items-center justify-center gap-30px w-full">
-          <h1 className="text-2xl text-center">
+        <div className="flex w-full flex-col items-center justify-center gap-30px">
+          <h1 className="text-center text-2xl">
             Search for a location to get Weather Data
           </h1>
           <form
@@ -107,23 +107,23 @@ export default function Home() {
             <input
               type="text"
               placeholder="Enter a location to search for weather..."
-              className="px-4 py-2 rounded-l-lg grow outline-none bg-white text-black focus:bg-gray-100 border-t-2 border-b-2 border-l-2 border-gray-300 focus:border-blue-400 focus:ring-0 transition-colors duration-300"
+              className="grow rounded-l-lg border-b-2 border-l-2 border-t-2 border-gray-300 bg-white px-4 py-2 text-black outline-none transition-colors duration-300 focus:border-blue-400 focus:bg-gray-100 focus:ring-0"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
             <button
               type="submit"
-              className="px-4 py-2 rounded-r-lg bg-green text-white hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300"
+              className="rounded-r-lg bg-green px-4 py-2 text-white transition-colors duration-300 hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
               Search
             </button>
           </form>
 
           {isLoading && (
-            <p className="text-xl text-white font-bold">Loading...</p>
+            <p className="text-xl font-bold text-white">Loading...</p>
           )}
           {errorMessage && (
-            <p className="text-red-500 text-xl font-bold">{errorMessage}</p>
+            <p className="text-xl font-bold text-red-500">{errorMessage}</p>
           )}
           {weatherData && (
             <WeatherCard

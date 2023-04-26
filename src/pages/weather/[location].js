@@ -29,7 +29,7 @@ export default function Location({ weatherData, locationData }) {
   return (
     <Layout>
       <PageSectionContainer>
-        <h1 className="text-3xl font-bold mb-4">{location}</h1>
+        <h1 className="mb-4 text-3xl font-bold">{location}</h1>
         {pageWeatherData && pageLocationData ? (
           <WeatherCard
             weatherData={pageWeatherData}

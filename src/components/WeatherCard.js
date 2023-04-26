@@ -8,10 +8,10 @@ const WeatherCard = ({ weatherData, locationData }) => {
   const { country, locationName, location } = locationData;
 
   return (
-    <div className="flex flex-col gap-30px rounded-lg shadow-md bg-mirage w-fit md:w-[550px] max-w-full mx-auto">
-      <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-10px md:gap-30px pt-30px px-30px w-full">
+    <div className="mx-auto flex w-fit max-w-full flex-col gap-30px rounded-lg bg-mirage shadow-md md:w-[550px]">
+      <div className="flex w-full flex-col-reverse items-center justify-between gap-10px px-30px pt-30px md:flex-row md:gap-30px">
         <div className="flex flex-col gap-10px md:gap-15px">
-          <div className="flex flex-col md:flex-row items-center md:items-end gap-5px md:gap-10px">
+          <div className="flex flex-col items-center gap-5px md:flex-row md:items-end md:gap-10px">
             <p className="text-3xl font-bold text-pink">{temp}°C</p>
             <p className="text-sm text-pink opacity-50">
               {" "}
@@ -25,13 +25,13 @@ const WeatherCard = ({ weatherData, locationData }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-10px items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-10px">
           <WeatherIcon iconName={iconName} weather={weather} />
-          <p className="text-base capitalize font-bold">{weather}</p>
+          <p className="text-base font-bold capitalize">{weather}</p>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-20px justify-between items-center w-full py-20px px-30px border-t border-bleached">
+      <div className="flex w-full flex-col items-center justify-between gap-20px border-t border-bleached px-30px py-20px md:flex-row">
         <div className="flex items-center gap-25px">
           <div className="flex items-center gap-7px">
             <Image

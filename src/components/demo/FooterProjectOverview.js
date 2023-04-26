@@ -1,8 +1,8 @@
 export default function FooterProjectOverview() {
   return (
-    <div className="flex flex-col gap-30px w-full">
-      <div className="flex flex-col gap-15px max-w-full">
-        <h3 className={`text-2xl font-primary font-semibold`}>
+    <div className="flex w-full flex-col gap-30px">
+      <div className="flex max-w-full flex-col gap-15px">
+        <h3 className={`font-primary text-2xl font-semibold`}>
           About the Project
         </h3>
 
@@ -14,7 +14,7 @@ export default function FooterProjectOverview() {
         </p>
       </div>
 
-      <p className="overflow-x-auto flex w-max justify-center border-b border-amethyst bg-mirage text-green text-xs pb-6 pt-8 backdrop-blur-2xl lg:rounded-xl lg:border lg:p-4 ">
+      <p className="flex w-max justify-center overflow-x-auto border-b border-amethyst bg-mirage pb-6 pt-8 text-xs text-green backdrop-blur-2xl lg:rounded-xl lg:border lg:p-4 ">
         <code className="font-mono font-bold">
           npx create-next-app --e https://github.com/giannisrig/nextjs-weather
           YOUR_APP_NAME
