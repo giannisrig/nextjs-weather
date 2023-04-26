@@ -1,27 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { HYDRATE } from 'next-redux-wrapper';
+import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-    open: false,
+  open: false,
 };
 
 export const mobileMenuSlice = createSlice({
-    name: 'mobileMenu',
-    initialState,
-    reducers: {
-        setMobileMenuOpen(state, action) {
-            state.open = action.payload;
-        },
-
-        extraReducers: {
-            [HYDRATE]: (state, action) => {
-                return {
-                    ...state,
-                    ...action.payload.mobileMenu,
-                };
-            },
-        },
+  name: "mobileMenu",
+  initialState,
+  reducers: {
+    setMobileMenuOpen(state, action) {
+      state.open = action.payload;
     },
+
+    extraReducers: {
+      [HYDRATE]: (state, action) => {
+        return {
+          ...state,
+          ...action.payload.mobileMenu,
+        };
+      },
+    },
+  },
 });
 
 export const { setMobileMenuOpen } = mobileMenuSlice.actions;
