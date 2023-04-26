@@ -1,142 +1,141 @@
-import Head from 'next/head';
-import { useState } from 'react';
-import axios from 'axios';
-import validateLocation from '@/libs/utils/validateLocation';
-import fetchLocationData from '@/libs/utils/fetchLocationData';
-import formatWeatherDataMinimal from '@/libs/utils/formatWeatherDataMinimal';
+import Head from "next/head";
+import { useState } from "react";
+import axios from "axios";
+import validateLocation from "@/libs/utils/validateLocation";
+import fetchLocationData from "@/libs/utils/fetchLocationData";
+import formatWeatherDataMinimal from "@/libs/utils/formatWeatherDataMinimal";
 import Layout from "@/components/layout/Layout";
-import WeatherCard from '@/components/WeatherCard';
-import PageSectionContainer from '@/components/common/section/PageSectionContainer';
-import PopularLocations from '@/components/PopularLocations';
+import WeatherCard from "@/components/WeatherCard";
+import PageSectionContainer from "@/components/common/section/PageSectionContainer";
+import PopularLocations from "@/components/PopularLocations";
 
 export default function Home() {
+  // Define state variables for the location and weather data
+  const [location, setLocation] = useState("");
+  const [locationData, setLocationData] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Add state for loading indicator
+  const [errorMessage, setErrorMessage] = useState(null); // Add state for error message
 
-    // Define state variables for the location and weather data
-    const [location, setLocation]         = useState('');
-    const [locationData, setLocationData] = useState(null);
-    const [weatherData, setWeatherData]   = useState(null);
-    const [isLoading, setIsLoading]       = useState(false); // Add state for loading indicator
-    const [errorMessage, setErrorMessage] = useState(null); // Add state for error message
+  // Define an event handler for the form submission
+  const handleSubmit = async (event) => {
+    // Prevent the default form submission
+    event.preventDefault();
 
-    // Define an event handler for the form submission
-    const handleSubmit = async (event) => {
+    // Set loading state to true when form is submitted
+    setIsLoading(true);
 
-        // Prevent the default form submission
-        event.preventDefault();
+    // Set error message to null when form is submitted
+    setErrorMessage(null);
 
-        // Set loading state to true when form is submitted
-        setIsLoading(true);
+    // Send a request to the api to fetch the weather data for the given location
+    try {
+      // Validate the location entered by the user
+      const isValid = validateLocation(location);
 
-        // Set error message to null when form is submitted
-        setErrorMessage(null);
+      if (!isValid) {
+        // Set the error message state when the location is invalid
+        setErrorMessage("Invalid location entered.");
+        return;
+      }
 
-        // Send a request to the api to fetch the weather data for the given location
-        try {
+      // Reverse geocode to fetch location data from Google Maps including the coordinates
+      const geocodedLocationData = await fetchLocationData(location);
 
-            // Validate the location entered by the user
-            const isValid = validateLocation(location);
+      // Set the location data state to the geocoded data fetched
+      setLocationData(geocodedLocationData);
 
-            if (!isValid){
+      // Make a call to the project client API to get the weather data
+      await axios
+        .get(
+          `/api/weather?latitude=${geocodedLocationData.lat}&longitude=${geocodedLocationData.lng}`
+        )
+        .then((response) => {
+          // Format the Weather data with the minimal required data only
+          const data = formatWeatherDataMinimal(response.data);
 
-                // Set the error message state when the location is invalid
-                setErrorMessage('Invalid location entered.');
-                return;
+          // Set the weather data state to the data fetched
+          setWeatherData(data);
+          console.log("Weather Data", response.data);
 
-            }
+          // Set location state to empty string
+          // setLocation("");
+        })
+        .catch((error) => {
+          // console.log(error);
 
-            // Reverse geocode to fetch location data from Google Maps including the coordinates
-            const geocodedLocationData = await fetchLocationData(location);
+          // handle error response
+          if (error.response) {
+            // The request was made and the server responded with a status code that falls out of the range of 2xx
+            setErrorMessage(error.response.status + ": " + error.response.data);
+          } else if (error.request) {
+            // The request was made but no response was received
+            setErrorMessage(
+              "The request was made but no response was received"
+            );
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            setErrorMessage(
+              "An unexpected error occurred while trying to make your request."
+            );
+          }
+        });
+    } catch (error) {
+      // Set the error message state when an error occurs
+      setErrorMessage("Unable to fetch weather data. Please try again.");
+    } finally {
+      // Set loading state to false when the request is finished
+      setIsLoading(false);
+    }
+  };
 
-            // Set the location data state to the geocoded data fetched
-            setLocationData(geocodedLocationData);
+  return (
+    <Layout>
+      <Head>
+        <title>NextJS: Weather App | Demo Project by Giannis Riganas</title>
+        <meta name="description" content="A weather app built with Next.js" />
+      </Head>
+      <PageSectionContainer>
+        <div className="flex flex-col items-center justify-center gap-30px w-full">
+          <h1 className="text-2xl text-center">
+            Search for a location to get Weather Data
+          </h1>
+          <form
+            className="mb-4 flex w-[600px] max-w-full"
+            onSubmit={(e) => handleSubmit(e)}
+          >
+            <input
+              type="text"
+              placeholder="Enter a location to search for weather..."
+              className="px-4 py-2 rounded-l-lg grow outline-none bg-white text-black focus:bg-gray-100 border-t-2 border-b-2 border-l-2 border-gray-300 focus:border-blue-400 focus:ring-0 transition-colors duration-300"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-r-lg bg-green text-white hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300"
+            >
+              Search
+            </button>
+          </form>
 
-            // Make a call to the project client API to get the weather data
-            await axios.get(`/api/weather?latitude=${geocodedLocationData.lat}&longitude=${geocodedLocationData.lng}`)
-                .then( response => {
-
-                    // Format the Weather data with the minimal required data only
-                    const data = formatWeatherDataMinimal(response.data);
-
-                    // Set the weather data state to the data fetched
-                    setWeatherData(data);
-                    console.log('Weather Data', response.data);
-
-                    // Set location state to empty string
-                    // setLocation("");
-
-                })
-                .catch(error => {
-
-                    // console.log(error);
-
-                    // handle error response
-                    if (error.response) {
-                        // The request was made and the server responded with a status code that falls out of the range of 2xx
-                        setErrorMessage( error.response.status + ': ' + error.response.data );
-                    }
-                    else if (error.request) {
-                        // The request was made but no response was received
-                        setErrorMessage( 'The request was made but no response was received' );
-                    }
-                    else {
-                        // Something happened in setting up the request that triggered an Error
-                        setErrorMessage( 'An unexpected error occurred while trying to make your request.' );
-                    }
-
-                });
-
-        }
-        catch (error) {
-            // Set the error message state when an error occurs
-            setErrorMessage('Unable to fetch weather data. Please try again.');
-        }
-        finally {
-            // Set loading state to false when the request is finished
-            setIsLoading(false);
-        }
-
-    };
-
-    return (
-        <Layout>
-            <Head>
-                <title>NextJS: Weather App | Demo Project by Giannis Riganas</title>
-                <meta name="description" content="A weather app built with Next.js" />
-            </Head>
-            <PageSectionContainer>
-                <div className="flex flex-col items-center justify-center gap-30px w-full">
-                    <h1 className="text-2xl text-center">Search for a location to get Weather Data</h1>
-                    <form className="mb-4 flex w-[600px] max-w-full" onSubmit={(e) => handleSubmit(e)}>
-                        <input
-                            type="text"
-                            placeholder="Enter a location to search for weather..."
-                            className="px-4 py-2 rounded-l-lg grow outline-none bg-white text-black focus:bg-gray-100 border-t-2 border-b-2 border-l-2 border-gray-300 focus:border-blue-400 focus:ring-0 transition-colors duration-300"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                        />
-                        <button
-                            type="submit"
-                            className="px-4 py-2 rounded-r-lg bg-green text-white hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300"
-                        >
-                            Search
-                        </button>
-                    </form>
-
-                    {isLoading && (
-                        <p className="text-xl text-white font-bold">Loading...</p>
-                    )}
-                    {errorMessage && (
-                        <p className="text-red-500 text-xl font-bold">{errorMessage}</p>
-                    )}
-                    {weatherData && (
-                        <WeatherCard weatherData={weatherData} locationData={locationData} />
-                    )}
-
-                </div>
-            </PageSectionContainer>
-            {/*<PageSectionContainer>*/}
-            {/*    <PopularLocations />*/}
-            {/*</PageSectionContainer>*/}
-        </Layout>
-    )
+          {isLoading && (
+            <p className="text-xl text-white font-bold">Loading...</p>
+          )}
+          {errorMessage && (
+            <p className="text-red-500 text-xl font-bold">{errorMessage}</p>
+          )}
+          {weatherData && (
+            <WeatherCard
+              weatherData={weatherData}
+              locationData={locationData}
+            />
+          )}
+        </div>
+      </PageSectionContainer>
+      {/*<PageSectionContainer>*/}
+      {/*    <PopularLocations />*/}
+      {/*</PageSectionContainer>*/}
+    </Layout>
+  );
 }
