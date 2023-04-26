@@ -19,7 +19,7 @@ module.exports = {
       },
     },
     screens: {
-      'sm': '640px',
+      'sm': '550px',
       // => @media (min-width: 640px) { ... }
       'md': '768px',
       // => @media (min-width: 768px) { ... }
@@ -55,6 +55,7 @@ module.exports = {
         '5px': '5px',
         '7px': '7px',
         '10px': '10px',
+        '12px': '12px',
         '15px': '15px',
         '20px': '20px',
         '25px': '25px',
@@ -63,6 +64,7 @@ module.exports = {
         '40px': '40px',
         '50px': '50px',
         '60px': '60px',
+        '70px': '70px',
         '80px': '80px',
         '100px': '100px',
         '120px': '120px',

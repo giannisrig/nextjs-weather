@@ -26,24 +26,6 @@ export default function Header() {
                 <code className="font-mono font-bold">Github</code>
               </span>
             </a>
-            <div className="static flex h-auto w-max items-end justify-center">
-              <a
-                className="flex place-items-center gap-2"
-                href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Deploy on:{" "}
-                <Image
-                  src="/vercel.svg"
-                  alt="Vercel Logo"
-                  className="invert"
-                  width={80}
-                  height={18}
-                  priority
-                />
-              </a>
-            </div>
             <HamburgerButton />
           </div>
         </div>

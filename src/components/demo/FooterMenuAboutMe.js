@@ -4,23 +4,23 @@ export default function FooterMenuAboutMe() {
   const list = [
     {
       name: "Website",
-      url: "#",
+      url: "https://giannisriganas.gr",
     },
     {
       name: "Github",
-      url: "#",
+      url: "https://github.com/giannisrig",
     },
     {
       name: "LinkedIn",
-      url: "#",
+      url: "https://www.linkedin.com/in/giannis-riganas/",
     },
     {
       name: "UpWork",
-      url: "#",
+      url: "https://www.upwork.com/fl/giannisriganas",
     },
     {
       name: "Code Playground",
-      url: "#",
+      url: "https://playground.giannisriganas.gr",
     },
   ];
 

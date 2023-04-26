@@ -1,6 +1,8 @@
 import FooterMenu from "@/components/demo/FooterMenu";
 
 export default function FooterMenuGetStarted() {
+  const repository = "https://github.com/giannisrig/nextjs-weather";
+
   const list = [
     {
       name: "Read Article / Tutorial",
@@ -8,7 +10,7 @@ export default function FooterMenuGetStarted() {
     },
     {
       name: "View Repository",
-      url: "#",
+      url: repository,
     },
     {
       name: "Live Demo",
@@ -16,11 +18,11 @@ export default function FooterMenuGetStarted() {
     },
     {
       name: "Generate Template",
-      url: "#",
+      url: repository + "/generate",
     },
     {
       name: "Deploy on Vercel",
-      url: "#",
+      url: "https://vercel.com/import/git?s=" + repository,
     },
   ];
 
