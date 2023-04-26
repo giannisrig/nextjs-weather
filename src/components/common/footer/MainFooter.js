@@ -10,7 +10,7 @@ export default function MainFooter() {
 
             <div className="container">
 
-                <div className="w-full flex flex-col gap-30px md:gap-50px lg:gap-80px">
+                <div className="w-full flex flex-col gap-30px md:gap-50px lg:gap-100px">
 
                     <div className="w-full grid grid-cols-4 gap-50px">
 

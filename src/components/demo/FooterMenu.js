@@ -5,7 +5,7 @@ export default function FooterMenu({list}) {
             { list ? (
                 list.map((itemData, index) => (
                 <li key={index}>
-                    <a href={itemData.url} target="_blank">
+                    <a href={itemData.url} target="_blank" className="text-amethyst hover:text-pink transition-all duration-200">
                         {itemData.name}
                     </a>
                 </li>
