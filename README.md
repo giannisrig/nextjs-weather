@@ -1,3 +1,17 @@
+## Overview
+
+This is a starter template using the following stack:
+
+- Framework - [NextJS 13](https://nextjs.org/13)
+- Language - [JavasScript](https://www.typescriptlang.org)
+- State - [Redux](https://redux.js.org/)
+- HTTP Client - [Axios](https://axios-http.com/)
+- Deployment - [Vercel](https://vercel.com/docs/concepts/next.js/overview)
+- Styling - [Tailwind CSS](https://tailwindcss.com) & [SASS](https://sass-lang.com/) 
+- Analytics - [NextJS Google Analytics](https://www.npmjs.com/package/nextjs-google-analytics)
+- Linting - [ESLint](https://eslint.org)
+- Formatting - [Prettier](https://prettier.io)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
