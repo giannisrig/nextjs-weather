@@ -4,6 +4,7 @@ const WeatherIcon = ({ iconName, weather }) => {
 
   return (
     <Image
+      className="max-w-full"
       src={iconPath}
       alt={`weather icon for ${weather}`}
       width={45}
