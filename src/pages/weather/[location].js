@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import getWeatherLocation from "@/libs/api/getWeatherLocation";
-import Layout from "@/components/Layout/Layout";
+import Layout from "@/components/layout/Layout";
 import WeatherCard from "@/components/WeatherCard";
 import PageSectionContainer from "@/components/common/section/PageSectionContainer";
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import MobileMenu from "@/components/common/mobileMenu/MobileMenu";
 import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
+import HeaderWeather from "@/components/HeaderWeather";
 
 export default function Header() {
   return (
@@ -26,7 +27,10 @@ export default function Header() {
                 <code className="font-mono font-bold">Github</code>
               </span>
             </a>
-            <HamburgerButton />
+            <div className="flex items-center gap-20px">
+              <HeaderWeather />
+              <HamburgerButton />
+            </div>
           </div>
         </div>
       </header>

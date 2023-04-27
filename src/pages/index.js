@@ -22,9 +22,9 @@ export default function Home() {
           <SearchWeatherCard />
         </div>
       </PageSectionContainer>
-      <PageSectionContainer>
-        <PopularLocations />
-      </PageSectionContainer>
+      {/*<PageSectionContainer>*/}
+      {/*  <PopularLocations />*/}
+      {/*</PageSectionContainer>*/}
     </Layout>
   );
 }
