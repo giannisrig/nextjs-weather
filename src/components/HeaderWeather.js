@@ -23,7 +23,7 @@ const HeaderWeather = () => {
           href={`/weather/${location}`}
           className="flex items-center gap-7px font-secondary text-sm text-white"
         >
-          <div className="w-[22px]">
+          <div className="w-[20px]">
             <WeatherIcon
               iconName={weatherData.iconName}
               weather={weatherData.weather}
