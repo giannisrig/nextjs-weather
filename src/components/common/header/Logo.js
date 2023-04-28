@@ -4,7 +4,7 @@ export default function Logo() {
   return (
     <Link
       href={"/"}
-      className="flex items-center gap-[3px]"
+      className="flex items-center gap-[3px] transition-colors duration-200 hover:text-pink"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -15,9 +15,7 @@ export default function Logo() {
         height={25}
       />
       <span className="text-2xl font-light text-amethyst">/</span>
-      <h4 className={`font-primary text-lg font-semibold text-white`}>
-        Weather App
-      </h4>
+      <h4 className={`font-primary text-lg font-semibold`}>Weather App</h4>
     </Link>
   );
 }

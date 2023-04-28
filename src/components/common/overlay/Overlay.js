@@ -29,7 +29,7 @@ export default function Overlay() {
   return (
     <div
       className={
-        `fixed left-0 top-0 z-20 h-screen w-screen backdrop-blur-sm ` +
+        `fixed left-0 top-0 z-20 h-screen w-screen backdrop-blur-lg ` +
         overlayClass
       }
       onClick={(e) => overlayClickHandler(e)}

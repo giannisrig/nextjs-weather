@@ -7,7 +7,7 @@ import {
   selectWeatherData,
 } from "@/slices/searchSlice";
 
-const SearchWeatherCard = () => {
+export default function SearchWeatherCard() {
   const isLoading = useSelector(selectIsSearchLoadingLoading); // updated
   const errorMessage = useSelector(selectErrorMessage); // updated
   const weatherData = useSelector(selectWeatherData); // updated
@@ -24,6 +24,4 @@ const SearchWeatherCard = () => {
       )}
     </>
   );
-};
-
-export default SearchWeatherCard;
+}

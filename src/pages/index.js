@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from "@/components/layout/Layout";
 import PageSectionContainer from "@/components/common/section/PageSectionContainer";
 import PopularLocations from "@/components/PopularLocations";
-import SearchWeatherCard from "@/components/SeachWeatherCard";
+import SearchWeatherCard from "@/components/SearchWeatherCard";
 import SearchForm from "@/components/search/SearchForm";
 
 export default function Home() {
@@ -22,9 +22,9 @@ export default function Home() {
           <SearchWeatherCard />
         </div>
       </PageSectionContainer>
-      {/*<PageSectionContainer>*/}
-      {/*  <PopularLocations />*/}
-      {/*</PageSectionContainer>*/}
+      <PageSectionContainer>
+        <PopularLocations />
+      </PageSectionContainer>
     </Layout>
   );
 }

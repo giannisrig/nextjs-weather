@@ -12,7 +12,7 @@ import {
   setLocationData,
 } from "@/slices/searchSlice";
 
-const SearchForm = () => {
+export default function SearchForm() {
   // Define the Redux dispatch
   const dispatch = useDispatch();
 
@@ -108,7 +108,7 @@ const SearchForm = () => {
 
   return (
     <form
-      className="mb-4 flex w-[600px] max-w-full"
+      className="flex w-full max-w-[600px]"
       onSubmit={(e) => handleSubmit(e)}
     >
       <input
@@ -126,6 +126,4 @@ const SearchForm = () => {
       </button>
     </form>
   );
-};
-
-export default SearchForm;
+}

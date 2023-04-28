@@ -3,7 +3,7 @@ import CountryIcon from "@/components/CountryIcon";
 import Image from "next/image";
 import Link from "next/link";
 
-const WeatherCard = ({ weatherData, locationData }) => {
+export default function WeatherCard({ weatherData, locationData }) {
   const { iconName, temp, tempFeel, humidity, weather, uvi } = weatherData;
   const { country, locationName, location } = locationData;
 
@@ -69,6 +69,4 @@ const WeatherCard = ({ weatherData, locationData }) => {
       </div>
     </div>
   );
-};
-
-export default WeatherCard;
+}
