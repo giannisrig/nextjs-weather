@@ -1,7 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface OverlayState {
+  active: boolean;
+}
+
+const initialState: OverlayState = {
   active: false,
 };
 
@@ -9,17 +12,8 @@ export const overlaySlice = createSlice({
   name: "overlay",
   initialState,
   reducers: {
-    setOverlayActive(state, action) {
+    setOverlayActive(state, action: PayloadAction<boolean>) {
       state.active = action.payload;
-    },
-
-    extraReducers: {
-      [HYDRATE]: (state, action) => {
-        return {
-          ...state,
-          ...action.payload.overlay,
-        };
-      },
     },
   },
 });
