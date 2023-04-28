@@ -54,16 +54,16 @@ export default function SearchForm() {
 
       // Make a call to the project client API to get the weather data
       await axios
-        .get(
-          `/api/weather?latitude=${geocodedLocationData.lat}&longitude=${geocodedLocationData.lng}`
-        )
+        .get(`/api/weather?latitude=${geocodedLocationData.lat}&longitude=${geocodedLocationData.lng}`)
         .then((response) => {
+          const { weatherData } = response.data;
+
           // Format the Weather data with the minimal required data only
-          const data = formatWeatherDataMinimal(response.data);
+          const data = formatWeatherDataMinimal(weatherData);
 
           // Set the weather data state to the data fetched
           dispatch(setWeatherData(data));
-          console.log("Weather Data", response.data);
+          console.log("Weather Data", weatherData);
 
           // Set location state to empty string
           // setLocation("");
@@ -74,32 +74,18 @@ export default function SearchForm() {
           // handle error response
           if (error.response) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
-            dispatch(
-              setErrorMessage(
-                error.response.status + ": " + error.response.data
-              )
-            );
+            dispatch(setErrorMessage(error.response.status + ": " + error.response.data));
           } else if (error.request) {
             // The request was made but no response was received
-            dispatch(
-              setErrorMessage(
-                "The request was made but no response was received"
-              )
-            );
+            dispatch(setErrorMessage("The request was made but no response was received"));
           } else {
             // Something happened in setting up the request that triggered an Error
-            dispatch(
-              setErrorMessage(
-                "An unexpected error occurred while trying to make your request."
-              )
-            );
+            dispatch(setErrorMessage("An unexpected error occurred while trying to make your request."));
           }
         });
     } catch (error) {
       // Set the error message state when an error occurs
-      dispatch(
-        setErrorMessage("Unable to fetch weather data. Please try again.")
-      );
+      dispatch(setErrorMessage("Unable to fetch weather data. Please try again."));
     } finally {
       // Set loading state to false when the request is finished
       dispatch(setIsSearchLoading(false));
@@ -107,10 +93,7 @@ export default function SearchForm() {
   };
 
   return (
-    <form
-      className="flex w-full max-w-[600px]"
-      onSubmit={(e) => handleSubmit(e)}
-    >
+    <form className="flex w-full max-w-[600px]" onSubmit={(e) => handleSubmit(e)}>
       <input
         type="text"
         placeholder="Enter a location to search for weather..."

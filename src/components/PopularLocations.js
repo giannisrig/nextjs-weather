@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getWeatherLocation from "@/libs/api/getWeatherLocation";
+import getWeatherItem from "@/libs/api/getWeatherItem";
 import WeatherCard from "@/components/WeatherCard";
 
 const PopularLocations = () => {
@@ -12,9 +12,7 @@ const PopularLocations = () => {
     const fetchData = async () => {
       const data = await Promise.all(
         predefinedLocations.map(async (location, index) => {
-          const { locationData, weatherData } = await getWeatherLocation(
-            location
-          );
+          const { locationData, weatherData } = await getWeatherItem(location);
           return {
             key: index,
             locationData: locationData,

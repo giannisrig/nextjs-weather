@@ -3,7 +3,7 @@ import MobileMenu from "@/components/common/mobileMenu/MobileMenu";
 import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
 import HeaderWeather from "@/components/HeaderWeather";
 import Logo from "@/components/common/header/Logo";
-import SearchForm from "@/components/search/SearchForm";
+// import SearchForm from "@/components/search/SearchForm";
 
 export default function Header() {
   return (

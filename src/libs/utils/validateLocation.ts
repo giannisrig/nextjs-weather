@@ -1,4 +1,4 @@
-const validateLocation = (location) => {
+const validateLocation = (location: string): boolean => {
   // Check if location is a non-empty string
   if (typeof location !== "string" || location.trim() === "") {
     return false;

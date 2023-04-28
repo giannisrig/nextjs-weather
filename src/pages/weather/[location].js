@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import getWeatherLocation from "@/libs/api/getWeatherLocation";
+import getWeatherItem from "@/libs/api/getWeatherItem";
 import Layout from "@/components/layout/Layout";
 import WeatherCard from "@/components/WeatherCard";
 import PageSectionContainer from "@/components/common/section/PageSectionContainer";
@@ -15,7 +15,7 @@ export default function Location({ weatherData, locationData }) {
   useEffect(() => {
     const fetchData = async () => {
       // Get the Weather and Location Data
-      const { locationData, weatherData } = await getWeatherLocation(location);
+      const { locationData, weatherData } = await getWeatherItem(location);
 
       setPageLocationData(locationData);
       setPageWeatherData(weatherData);
@@ -31,10 +31,7 @@ export default function Location({ weatherData, locationData }) {
       <PageSectionContainer>
         <h1 className="mb-4 text-3xl font-bold">{location}</h1>
         {pageWeatherData && pageLocationData ? (
-          <WeatherCard
-            weatherData={pageWeatherData}
-            locationData={pageLocationData}
-          />
+          <WeatherCard weatherData={pageWeatherData} locationData={pageLocationData} />
         ) : (
           <p>Loading...</p>
         )}
@@ -49,7 +46,7 @@ export async function getServerSideProps({ params }) {
 
   try {
     // Get the Weather and Location Data
-    const { locationData, weatherData } = await getWeatherLocation(location);
+    const { locationData, weatherData } = await getWeatherItem(location);
 
     // Send the Data as props to the page
     return {

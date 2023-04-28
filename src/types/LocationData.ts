@@ -1,4 +1,4 @@
-interface LocationData {
+export interface LocationData {
   lat: number;
   lng: number;
   country: string;
