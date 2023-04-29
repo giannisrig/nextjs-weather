@@ -3,9 +3,7 @@ import TechStack from "@/components/demo/TechStack";
 export default function FooterDocumentations() {
   return (
     <div className="flex flex-col gap-25px">
-      <h4 className={`font-primary text-2xl font-semibold`}>
-        Tech stack of the project
-      </h4>
+      <h4 className={`font-primary text-2xl font-semibold`}>Tech stack of the project</h4>
       <div className="grid w-full grid-cols-1 gap-30px sm:grid-cols-2 mdl:grid-cols-4 lg:gap-50px">
         <TechStack
           url="https://nextjs.org/docs"

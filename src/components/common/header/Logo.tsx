@@ -5,15 +5,9 @@ export default function Logo() {
     <Link
       href={"/"}
       className="flex items-center gap-[3px] transition-colors duration-200 hover:text-pink"
-      target="_blank"
       rel="noopener noreferrer"
     >
-      <Image
-        src={"/images/demo/vercel.svg"}
-        alt={"Logo of the Project"}
-        width={25}
-        height={25}
-      />
+      <Image src={"/images/demo/vercel.svg"} alt={"Logo of the Project"} width={25} height={25} />
       <span className="text-2xl font-light text-amethyst">/</span>
       <h4 className={`font-primary text-lg font-semibold`}>Weather App</h4>
     </Link>

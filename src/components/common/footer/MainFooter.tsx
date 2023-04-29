@@ -21,9 +21,7 @@ export default function MainFooter() {
             </div>
           </div>
           <div className="flex max-w-full flex-col gap-20px">
-            <h4 className={`font-primary text-2xl font-semibold`}>
-              Create your NextJs app
-            </h4>
+            <h4 className={`font-primary text-2xl font-semibold`}>Create your NextJs app</h4>
             <ProjectCommand />
           </div>
           <FooterDocumentations />

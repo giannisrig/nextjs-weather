@@ -3,7 +3,6 @@ import validateLocation from "@/libs/utils/validateLocation";
 import fetchLocationData from "@/libs/utils/fetchLocationData";
 import axios from "axios";
 import formatWeatherDataMinimal from "@/libs/utils/formatWeatherDataMinimal";
-import { useDispatch } from "react-redux";
 import {
   setSearchedLocation,
   setIsSearchLoading,
@@ -11,17 +10,19 @@ import {
   setWeatherData,
   setLocationData,
 } from "@/slices/searchSlice";
+import { useAppDispatch } from "@/libs/store/store";
 
 export default function SearchForm() {
   // Define the Redux dispatch
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // Define state variables for the location and weather data
   const [location, setLocation] = useState("");
 
   const handleChange = async (event) => {
-    setLocation(event.target.value);
-    dispatch(setSearchedLocation(event.target.value));
+    const inputLocation: string = event.target.value;
+    setLocation(inputLocation);
+    dispatch(setSearchedLocation(inputLocation));
   };
 
   // Define an event handler for the form submission

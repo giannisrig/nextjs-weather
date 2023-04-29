@@ -16,7 +16,6 @@ export default function Home() {
         <div className="flex w-full flex-col items-center justify-center gap-30px">
           <h1 className="text-center text-2xl">Search for a location to get Weather Data</h1>
           <SearchForm />
-
           <SearchWeatherCard />
         </div>
       </PageSectionContainer>

@@ -29,7 +29,6 @@ export default function FooterMenuGetStarted() {
   return (
     <div className="flex max-w-full flex-col gap-15px">
       <h3 className={`font-primary text-2xl font-semibold`}>Get started</h3>
-
       <FooterMenu list={list} />
     </div>
   );

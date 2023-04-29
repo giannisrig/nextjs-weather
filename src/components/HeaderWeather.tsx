@@ -5,7 +5,7 @@ import WeatherIcon from "@/components/WeatherIcon";
 
 export default function HeaderWeather() {
   const selector = useAppSelector;
-  const location: string = selector((state: RootState) => state.search.location); // updated
+  const location: string = selector((state: RootState) => state.search.searchedLocation); // updated
   const weatherData: WeatherData = selector((state: RootState) => state.search.weatherData); // updated
   const locationData: LocationData = selector((state: RootState) => state.search.locationData); // updated
 

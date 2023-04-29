@@ -27,7 +27,6 @@ export default function FooterMenuAboutMe() {
   return (
     <div className="flex max-w-full flex-col gap-15px">
       <h3 className={`font-primary text-2xl font-semibold`}>About me</h3>
-
       <FooterMenu list={list} />
     </div>
   );

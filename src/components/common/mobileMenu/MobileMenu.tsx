@@ -14,6 +14,7 @@ export default function MobileMenu() {
   const [mobileMenuClass, setMobileMenuClass] = useState("translate-x-full");
 
   const mobileMenuClassHandler = (stateSelector) => {
+    // Change the transform class for the mobile menu based on the stateSelector passed
     if (stateSelector) {
       setMobileMenuClass("translate-x-0");
     } else {
@@ -21,14 +22,17 @@ export default function MobileMenu() {
     }
   };
 
+  // Hook when the mobile menu state is changed
   useEffect(() => {
     mobileMenuClassHandler(mobileMenuOpen);
   }, [mobileMenuOpen]);
 
+  // Hook when the overlay state is changed
   useEffect(() => {
     mobileMenuClassHandler(overlayActive);
   }, [overlayActive]);
 
+  // Hook when the route is changing
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
       dispatch(setMobileMenuOpen(false));
@@ -42,10 +46,8 @@ export default function MobileMenu() {
       <div className="flex h-full w-full flex-col">
         <div className="flex items-center justify-between border-b-2 border-bleached px-30px py-10px pb-5px">
           <div className="py-10px xl:py-20px">Logo Here</div>
-
           <CloseMobileMenu />
         </div>
-
         <MobileNavigation />
       </div>
     </header>

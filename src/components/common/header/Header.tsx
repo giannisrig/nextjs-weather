@@ -1,8 +1,8 @@
-import Image from "next/image";
 import MobileMenu from "@/components/common/mobileMenu/MobileMenu";
 import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
 import HeaderWeather from "@/components/HeaderWeather";
 import Logo from "@/components/common/header/Logo";
+import GithubLink from "@/components/common/header/GithubLink";
 // import SearchForm from "@/components/search/SearchForm";
 
 export default function Header() {
@@ -14,22 +14,7 @@ export default function Header() {
             <div className="flex items-center gap-20px">
               <Logo />
               <div className="h-[20px] w-[2px] bg-bleached" />
-              <a
-                href="https://github.com/giannisrig/nextjs-weather"
-                target="_blank"
-                className="flex items-center gap-5px rounded-full border border-bleached bg-mirage px-10px py-7px transition-colors duration-200 hover:border-green hover:text-green"
-              >
-                <Image
-                  src="/github.svg"
-                  alt="Github Logo"
-                  width={18}
-                  height={18}
-                  priority
-                />
-                <span className="hidden font-secondary text-sm mdl:block">
-                  View on github
-                </span>
-              </a>
+              <GithubLink />
             </div>
 
             <div className="flex items-center gap-20px">
