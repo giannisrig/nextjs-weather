@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getWeatherItem from "@/libs/api/getWeatherItem";
-import WeatherCard from "@/components/WeatherCard";
+import WeatherCard from "@/components/weather/card/WeatherCard";
 
 const PopularLocations = () => {
   const [loading, setLoading] = useState(true);

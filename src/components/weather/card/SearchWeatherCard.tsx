@@ -1,4 +1,4 @@
-import WeatherCard from "@/components/WeatherCard";
+import WeatherCard from "@/components/weather/card/WeatherCard";
 import { RootState, useAppSelector } from "@/libs/store/store";
 import { WeatherData, LocationData } from "@/types/index";
 

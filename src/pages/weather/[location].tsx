@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import getWeatherItem from "@/libs/api/getWeatherItem";
 import Layout from "@/components/layout/Layout";
-import WeatherCard from "@/components/WeatherCard";
+import WeatherCard from "@/components/weather/card/WeatherCard";
 import PageSectionContainer from "@/components/common/section/PageSectionContainer";
 import { WeatherItem } from "@/types/index";
 

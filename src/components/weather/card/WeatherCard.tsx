@@ -1,9 +1,10 @@
-import WeatherIcon from "@/components/WeatherIcon";
-import CountryIcon from "@/components/CountryIcon";
-import Image from "next/image";
 import Link from "next/link";
+import WeatherIcon from "@/components/weather/WeatherIcon";
+import CountryIcon from "@/components/weather/CountryIcon";
+import WeatherMeta from "@/components/weather/WeatherMeta";
+import { WeatherItem } from "@/types/WeatherItem";
 
-export default function WeatherCard({ weatherData, locationData }) {
+export default function WeatherCard({ weatherData, locationData }: WeatherItem) {
   const { iconName, temp, tempFeel, humidity, weather, uvi } = weatherData;
   const { country, locationName, location } = locationData;
 
@@ -13,10 +14,7 @@ export default function WeatherCard({ weatherData, locationData }) {
         <div className="flex flex-col gap-10px md:gap-15px">
           <div className="flex flex-col items-center gap-5px md:flex-row md:items-end md:gap-10px">
             <p className="text-3xl font-bold text-pink">{temp}°C</p>
-            <p className="text-sm text-pink opacity-50">
-              {" "}
-              Feels like: {tempFeel}°C{" "}
-            </p>
+            <p className="text-sm text-pink opacity-50"> Feels like: {tempFeel}°C </p>
           </div>
 
           <div className="flex items-center gap-10px">
@@ -33,31 +31,8 @@ export default function WeatherCard({ weatherData, locationData }) {
 
       <div className="flex w-full flex-col items-center justify-between gap-20px border-t border-bleached px-30px py-20px md:flex-row">
         <div className="flex items-center gap-25px">
-          <div className="flex items-center gap-7px">
-            <Image
-              src="/images/weather/humidity.svg"
-              alt="Humidity Icon"
-              width={20}
-              height={20}
-            />
-            <p className="text-xs ">
-              <span className="opacity-70">Humidity:</span>
-              {humidity}%
-            </p>
-          </div>
-
-          <div className="flex items-center gap-7px">
-            <Image
-              src="/images/weather/uv.svg"
-              alt="Humidity Icon"
-              width={25}
-              height={25}
-            />
-            <p className="text-xs ">
-              <span className="opacity-70">UV:</span>
-              {uvi}
-            </p>
-          </div>
+          <WeatherMeta src="/images/weather/humidity.svg" alt="Humidity Icon" name="Humidity" value={`${humidity}%`} />
+          <WeatherMeta src="/images/weather/uv.svg" alt="UV Icon" name="UV" value={uvi} />
         </div>
 
         <Link

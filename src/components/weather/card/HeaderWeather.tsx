@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { WeatherData, LocationData } from "@/types/index";
 import { RootState, useAppSelector } from "@/libs/store/store";
-import WeatherIcon from "@/components/WeatherIcon";
+import WeatherIcon from "@/components/weather/WeatherIcon";
 
 export default function HeaderWeather() {
   const selector = useAppSelector;
