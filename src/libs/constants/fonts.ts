@@ -1,5 +1,11 @@
 import localFont from "next/font/local";
 import { Noto_Sans_Mono } from "next/font/google";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
+
+interface AppFonts {
+  primary: NextFontWithVariable;
+  secondary: NextFontWithVariable;
+}
 
 //load the Google fonts
 const noto_sans_mono = Noto_Sans_Mono({
@@ -30,9 +36,9 @@ const grava = localFont({
 });
 
 //define the fonts object
-const fonts = {
-  grava: grava,
-  notoSansMono: noto_sans_mono,
+const fonts: AppFonts = {
+  primary: noto_sans_mono,
+  secondary: grava,
 };
 
 export default fonts;

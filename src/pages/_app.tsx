@@ -11,7 +11,7 @@ export default function App({ Component, ...props }) {
   return (
     <Provider store={store}>
       <GoogleAnalytics trackPageViews />
-      <div className={`${fonts.notoSansMono.variable} ${fonts.grava.variable} font-primary`}>
+      <div className={`${fonts.primary.variable} ${fonts.secondary.variable} font-primary`}>
         <Component {...pageProps} />
       </div>
     </Provider>
