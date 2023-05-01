@@ -1,4 +1,4 @@
-interface ReverseGeocodeLocation {
+export interface ReverseGeocodeLocation {
   results: {
     address_components: {
       long_name: string;
