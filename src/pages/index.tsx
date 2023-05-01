@@ -4,6 +4,7 @@ import PageSectionContainer from "@/components/common/section/PageSectionContain
 import PopularLocations from "@/components/PopularLocations";
 import SearchWeatherCard from "@/components/weather/card/SearchWeatherCard";
 import SearchForm from "@/components/search/SearchForm";
+import WeatherLoadingCard from "@/components/weather/card/WeatherLoadingCard";
 
 export default function Home() {
   return (
@@ -16,7 +17,10 @@ export default function Home() {
         <div className="flex w-full flex-col items-center justify-center gap-30px">
           <h1 className="text-center text-2xl">Search for a location to get Weather Data</h1>
           <SearchForm />
-          <SearchWeatherCard />
+          <div className="flex items-center gap-10px">
+            <SearchWeatherCard />
+            <WeatherLoadingCard />
+          </div>
         </div>
       </PageSectionContainer>
       <PageSectionContainer>

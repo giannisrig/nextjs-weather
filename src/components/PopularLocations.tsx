@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import getWeatherItem from "@/libs/api/getWeatherItem";
 import WeatherCard from "@/components/weather/card/WeatherCard";
+import WeatherLoadingCard from "@/components/weather/card/WeatherLoadingCard";
 
 const PopularLocations = () => {
   const [loading, setLoading] = useState(true);
@@ -40,7 +41,12 @@ const PopularLocations = () => {
           />
         ))
       ) : (
-        <p>Loading...</p>
+        <>
+          <WeatherLoadingCard />
+          <WeatherLoadingCard />
+          <WeatherLoadingCard />
+          <WeatherLoadingCard />
+        </>
       )}
     </div>
   );
