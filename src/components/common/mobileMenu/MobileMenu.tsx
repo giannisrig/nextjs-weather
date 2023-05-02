@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { setMobileMenuOpen } from "@/slices/mobileMenuSlice";
 import MobileNavigation from "@/components/common/mobileMenu/MobileNavigation";
 import CloseMobileMenu from "@/components/common/mobileMenu/CloseMobileMenu";
+import Logo from "@/components/common/header/Logo";
 
 export default function MobileMenu() {
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function MobileMenu() {
     >
       <div className="flex h-full w-full flex-col">
         <div className="flex items-center justify-between border-b-2 border-bleached px-30px py-10px pb-5px">
-          <div className="py-10px xl:py-20px">Logo Here</div>
+          <Logo />
           <CloseMobileMenu />
         </div>
         <MobileNavigation />
