@@ -3,12 +3,14 @@ import { combineReducers, Reducer } from "@reduxjs/toolkit";
 import mobileMenuReducer from "@/slices/mobileMenuSlice";
 import overlayReducer from "@/slices/overlaySlice";
 import searchReducer from "@/slices/searchSlice";
+import searchFormReducer from "@/slices/searchFormSlice";
 
 // Define your reducers here
 const rootReducer: Reducer = combineReducers({
   mobileMenu: mobileMenuReducer,
   overlay: overlayReducer,
   search: searchReducer,
+  searchForm: searchFormReducer,
 });
 
 const combinedReducer = (state: any, action: any) => {

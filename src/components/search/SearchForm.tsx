@@ -1,25 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import validateLocation from "@/libs/utils/validateLocation";
 import fetchLocationData from "@/libs/utils/fetchLocationData";
 import axios from "axios";
 import formatWeatherDataMinimal from "@/libs/utils/formatWeatherDataMinimal";
 import {
-  setSearchedLocation,
-  setIsSearchLoading,
   setErrorMessage,
-  setWeatherData,
+  setIsSearchLoading,
   setLocationData,
+  setSearchedLocation,
+  setWeatherData,
 } from "@/slices/searchSlice";
-import { useAppDispatch } from "@/libs/store/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
+import Image from "next/image";
+import { setSearchFormFocus } from "@/slices/searchFormSlice";
 
-export default function SearchForm() {
+interface SearchFormProps {
+  header?: boolean;
+  inputClass?: string;
+  btnClass?: string;
+}
+
+export default function SearchForm({ header, inputClass, btnClass }: SearchFormProps) {
+  const inputClasses = inputClass
+    ? inputClass
+    : "w-full rounded-l-lg border-b-2 border-l-2 border-t-2 border-gray-300 bg-white px-4 py-2 text-black outline-none transition-colors duration-300 focus:border-blue-400 focus:bg-gray-100 focus:ring-0";
+  const btnClasses = btnClass
+    ? btnClass
+    : "rounded-r-lg bg-green px-4 py-2 text-white transition-colors duration-300 hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50";
+
   // Define the Redux dispatch
   const dispatch = useAppDispatch();
 
+  // Get the Search Form focus state
+  const searchFormFocus = useAppSelector((state: RootState) => state.searchForm.focus); // updated
+
   // Define state variables for the location and weather data
   const [location, setLocation] = useState("");
+  const [keyCommandAnimation, setKeyCommandAnimation] = useState("");
 
+  // Define the ref element for the form input
+  const inputRef = useRef(null);
+
+  // This code is triggered when the searchFormFocus state and header prop change
+  useEffect(() => {
+    // If the component is rendered on the Header and the state focus is true
+    // Then trigger focus on the form input
+    if (searchFormFocus === true && header && header === true) {
+      setKeyCommandAnimation("bg-mirage opacity-50");
+      inputRef.current.focus();
+      setTimeout(() => {
+        dispatch(setSearchFormFocus(false));
+      }, 500);
+    }
+
+    if (searchFormFocus === false && header && header === true) {
+      setKeyCommandAnimation("");
+    }
+  }, [searchFormFocus, header, dispatch]);
+
+  // The function that handles the input change
   const handleChange = async (event) => {
+    // Set the input value as the location
     const inputLocation: string = event.target.value;
     setLocation(inputLocation);
     dispatch(setSearchedLocation(inputLocation));
@@ -95,18 +136,29 @@ export default function SearchForm() {
 
   return (
     <form className="flex w-full max-w-[600px]" onSubmit={(e) => handleSubmit(e)}>
-      <input
-        type="text"
-        placeholder="Enter a location to search for weather..."
-        className="grow rounded-l-lg border-b-2 border-l-2 border-t-2 border-gray-300 bg-white px-4 py-2 text-black outline-none transition-colors duration-300 focus:border-blue-400 focus:bg-gray-100 focus:ring-0"
-        value={location}
-        onChange={(e) => handleChange(e)}
-      />
-      <button
-        type="submit"
-        className="rounded-r-lg bg-green px-4 py-2 text-white transition-colors duration-300 hover:bg-pink focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-      >
-        Search
+      <div className="relative grow">
+        <input
+          type="text"
+          placeholder={header ? "Enter a location" : "Enter a location to search for weather..."}
+          className={inputClasses}
+          value={location}
+          onChange={(e) => handleChange(e)}
+          ref={header ? inputRef : null}
+        />
+        {header ? (
+          <div
+            className={`absolute right-10px top-1/2 translate-y-[-50%] rounded-md bg-bleached px-7px py-[3px] font-secondary text-xs text-amethyst transition-colors duration-200 ${keyCommandAnimation}`}
+          >
+            CTR + K
+          </div>
+        ) : null}
+      </div>
+      <button type="submit" className={btnClasses}>
+        {header ? (
+          <Image src="/images/search.svg" className="invert" alt="Search Icon" width={18} height={18} />
+        ) : (
+          "Search"
+        )}
       </button>
     </form>
   );

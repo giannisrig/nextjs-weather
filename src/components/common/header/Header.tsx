@@ -3,7 +3,7 @@ import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
 import HeaderWeather from "@/components/weather/card/HeaderWeather";
 import Logo from "@/components/common/header/Logo";
 import GithubLink from "@/components/common/header/GithubLink";
-import SearchForm from "@/components/search/SearchForm";
+import HeaderSearch from "@/components/common/header/HeaderSearch";
 
 export default function Header() {
   return (
@@ -18,10 +18,7 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-20px">
-              <div className="w-[300px]">
-                <SearchForm />
-              </div>
-
+              <HeaderSearch />
               <HeaderWeather />
               <HamburgerButton />
             </div>
