@@ -4,6 +4,7 @@ import mobileMenuReducer from "@/slices/mobileMenuSlice";
 import overlayReducer from "@/slices/overlaySlice";
 import searchReducer from "@/slices/searchSlice";
 import searchFormReducer from "@/slices/searchFormSlice";
+import geoNavigationReducer from "@/slices/geoNavigtionSlice";
 
 // Define your reducers here
 const rootReducer: Reducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer: Reducer = combineReducers({
   overlay: overlayReducer,
   search: searchReducer,
   searchForm: searchFormReducer,
+  geoNavigation: geoNavigationReducer,
 });
 
 const combinedReducer = (state: any, action: any) => {

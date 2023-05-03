@@ -50,6 +50,7 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-weather': 'radial-gradient(ellipse at center, rgba(22, 18, 39, 0) 0%,rgb(21, 18, 39) 75%,rgb(23, 19, 39) 100%)',
       },
       spacing: {
         '5px': '5px',
@@ -71,6 +72,11 @@ module.exports = {
         '150px': '150px',
         '160px': '160px',
       },
+      zIndex: {
+        '1': '1',
+        '2': '2',
+        '3': '3',
+      }
     },
   },
   plugins: [],

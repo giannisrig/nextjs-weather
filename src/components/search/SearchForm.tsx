@@ -13,6 +13,9 @@ import {
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
 import Image from "next/image";
 import { setSearchFormFocus } from "@/slices/searchFormSlice";
+import { LocationData, GeocodeParams, WeatherItem, WeatherData } from "@/types/index";
+import { OpenWeatherResponse } from "@/types/api/OpenWeatherResponse";
+import getWeatherItem from "@/libs/utils/getWeatherItem";
 
 interface SearchFormProps {
   header?: boolean;
@@ -88,43 +91,25 @@ export default function SearchForm({ header, inputClass, btnClass }: SearchFormP
         return;
       }
 
-      // Reverse geocode to fetch location data from Google Maps including the coordinates
-      const geocodedLocationData = await fetchLocationData(location);
+      // Set the geocode params with the location
+      const geocodeParams: GeocodeParams = { location };
 
-      // Set the location data state to the geocoded data fetched
-      dispatch(setLocationData(geocodedLocationData));
+      // Get the Weather Item
+      const result: WeatherItem | string = await getWeatherItem(geocodeParams);
 
-      // Make a call to the project client API to get the weather data
-      await axios
-        .get(`/api/weather?latitude=${geocodedLocationData.lat}&longitude=${geocodedLocationData.lng}`)
-        .then((response) => {
-          const { weatherData } = response.data;
+      if (typeof result === "string") {
+        // If the result is string then it's the error message
+        setErrorMessage(result);
+      } else {
+        // Define the WeatherItem data
+        const weatherItem: WeatherItem = result;
+        const weatherData: WeatherData = weatherItem.weatherData;
+        const locationData: LocationData = weatherItem.locationData;
 
-          // Format the Weather data with the minimal required data only
-          const data = formatWeatherDataMinimal(weatherData);
-
-          // Set the weather data state to the data fetched
-          dispatch(setWeatherData(data));
-          console.log("Weather Data", weatherData);
-
-          // Set location state to empty string
-          // setLocation("");
-        })
-        .catch((error) => {
-          // console.log(error);
-
-          // handle error response
-          if (error.response) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            dispatch(setErrorMessage(error.response.status + ": " + error.response.data));
-          } else if (error.request) {
-            // The request was made but no response was received
-            dispatch(setErrorMessage("The request was made but no response was received"));
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            dispatch(setErrorMessage("An unexpected error occurred while trying to make your request."));
-          }
-        });
+        // Set the data to state
+        dispatch(setWeatherData(weatherData));
+        dispatch(setLocationData(locationData));
+      }
     } catch (error) {
       // Set the error message state when an error occurs
       dispatch(setErrorMessage("Unable to fetch weather data. Please try again."));
